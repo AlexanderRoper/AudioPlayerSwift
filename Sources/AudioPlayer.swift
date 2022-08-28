@@ -19,7 +19,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 import Foundation
 import AVFoundation
 
@@ -38,7 +37,6 @@ public class AudioPlayer: NSObject {
     public typealias SoundDidFinishCompletion = (_ didFinish: Bool) -> Void
 
     // MARK: Properties
-
     /// Name of the used to initialize the object
     public var name: String?
 
@@ -59,13 +57,7 @@ public class AudioPlayer: NSObject {
     /// the duration of the sound.
     public var duration: TimeInterval {
         if let nonNilsound = sound {
-            if let url = self.url {
-            let assetOpts = [AVURLAssetPreferPreciseDurationAndTimingKey: true]
-            let asset = AVURLAsset(url: url, options: assetOpts)
-
-            let assetDuration: Float64 = CMTimeGetSeconds(asset.duration)
-            return Double(assetDuration)
-            }
+            return nonNilsound.duration
         }
         return 0.0
     }
@@ -109,7 +101,6 @@ public class AudioPlayer: NSObject {
     }
 
     // MARK: Private properties
-
     public let sound: AVAudioPlayer?
     fileprivate var startVolume: Float = 1.0
     fileprivate var targetVolume: Float = 1.0 {
@@ -123,7 +114,6 @@ public class AudioPlayer: NSObject {
     fileprivate var timer: Timer?
 
     // MARK: Init
-
     public convenience init(fileName: String) throws {
         let soundFileComponents = fileName.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: ".")
         guard soundFileComponents.count == 2 else {
@@ -157,7 +147,6 @@ public class AudioPlayer: NSObject {
 }
 
 // MARK: - Play / Stop
-
 extension AudioPlayer {
 
     public func play(withDelay delay: Int = 0) {
@@ -177,7 +166,6 @@ extension AudioPlayer {
 }
 
 // MARK: - Fade
-
 extension AudioPlayer {
 
     public func fadeTo(volume: Float, duration: TimeInterval = 1.0) {
@@ -221,7 +209,6 @@ extension AudioPlayer {
 }
 
 // MARK: - AVAudioPlayerDelegate
-
 extension AudioPlayer: AVAudioPlayerDelegate {
 
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
