@@ -59,7 +59,11 @@ public class AudioPlayer: NSObject {
     /// the duration of the sound.
     public var duration: TimeInterval {
         if let nonNilsound = sound {
-            return nonNilsound.duration
+            let assetOpts = [AVURLAssetPreferPreciseDurationAndTimingKey: true]
+            let asset = AVURLAsset(url: self.url, options: assetOpts)
+
+            let assetDuration: Float64 = CMTimeGetSeconds(asset.duration)
+            return Double(assetDuration)
         }
         return 0.0
     }
