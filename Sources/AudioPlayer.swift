@@ -104,7 +104,7 @@ public class AudioPlayer: NSObject {
 
     // MARK: Private properties
 
-    let sound: AVAudioPlayer?
+    public let sound: AVAudioPlayer?
     fileprivate var startVolume: Float = 1.0
     fileprivate var targetVolume: Float = 1.0 {
         didSet {
