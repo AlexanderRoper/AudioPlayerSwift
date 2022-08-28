@@ -142,12 +142,6 @@ public class AudioPlayer: NSObject {
         super.init()
         sound?.delegate = self
     }
-    
-    public init(contentsOfData data: Data) throws {
-        sound = try AVAudioPlayer(data: data, fileTypeHint: "m4a")
-        super.init()
-        sound?.delegate = self
-    }
 
     deinit {
         timer?.invalidate()
